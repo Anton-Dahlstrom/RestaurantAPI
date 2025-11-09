@@ -1,8 +1,8 @@
 ﻿namespace RestaurantAPI.Enums
 {
-    public enum Role
-    {
-        User = 0,
-        Admin = 1
-    }
+	public enum Role
+	{
+		User = 0,
+		Admin = 1
+	}
 }

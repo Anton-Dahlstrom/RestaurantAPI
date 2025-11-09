@@ -6,39 +6,39 @@ using RestaurantAPI.Services.IServices;
 
 namespace RestaurantAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BookingController(IBookingService bookingService) : ControllerBase
-    {
-        [Authorize(Roles = "Admin")]
-        [HttpGet("Bookings")]
-        public async Task<ActionResult<List<BookingDTO>>> GetAllBookings()
-        {
-            List<BookingDTO> bookings = await bookingService.GetAllBookingsAsync();
+	[Route("api/[controller]")]
+	[ApiController]
+	public class BookingController(IBookingService bookingService) : ControllerBase
+	{
+		[Authorize(Roles = "Admin")]
+		[HttpGet("Bookings")]
+		public async Task<ActionResult<List<BookingDTO>>> GetAllBookings()
+		{
+			List<BookingDTO> bookings = await bookingService.GetAllBookingsAsync();
 
-            return Ok(bookings);
-        }
+			return Ok(bookings);
+		}
 
-        [Authorize(Roles = "Admin")]
-        [HttpPost("CreateBookingWithCustomer")] 
-        public async Task<ActionResult<List<BookingDTO>>> CreateBookingWithCustomer(BookingRequestDTO dto)
-        {
-            Booking? booking = await bookingService.CreateBookingWithCustomerAsync(dto);
-            if (booking == null) return BadRequest();
+		[Authorize(Roles = "Admin")]
+		[HttpPost("CreateBookingWithCustomer")]
+		public async Task<ActionResult<List<BookingDTO>>> CreateBookingWithCustomer(BookingRequestDTO dto)
+		{
+			Booking? booking = await bookingService.CreateBookingWithCustomerAsync(dto);
+			if (booking == null) return BadRequest();
 
-            return Ok(booking);
-        }
+			return Ok(booking);
+		}
 
-        [Authorize(Roles = "Admin")]
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteBooking(int id)
-        {
-            var success = await bookingService.DeleteBookingAsync(id);
+		[Authorize(Roles = "Admin")]
+		[HttpDelete("{id}")]
+		public async Task<ActionResult> DeleteBooking(int id)
+		{
+			var success = await bookingService.DeleteBookingAsync(id);
 
-            if (!success)
-                return NotFound();
+			if (!success)
+				return NotFound();
 
-            return NoContent();
-        }
-    }
+			return NoContent();
+		}
+	}
 }
