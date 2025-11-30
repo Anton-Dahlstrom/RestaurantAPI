@@ -23,6 +23,7 @@ namespace RestaurantAPI.Services
 			var user = new User
 			{
 				Username = dto.Username,
+				Role = Enums.Role.Admin
 			};
 
 			user.PasswordHash = _passwordHasher.HashPassword(user, dto.Password);
